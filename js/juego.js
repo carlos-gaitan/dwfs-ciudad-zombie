@@ -145,7 +145,7 @@ Juego.dibujar = function() {
   /* Aca hay que agregar la logica para poder dibujar al jugador principal
   utilizando al dibujante y los metodos que nos brinda.
   "Dibujante dibuja al jugador" */
-
+Dibujante.dibujarEntidad(Jugador);
   /* Completar */
 
   // Se recorren los obstaculos de la carretera pintandolos
