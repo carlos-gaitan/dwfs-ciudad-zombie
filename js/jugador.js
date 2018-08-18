@@ -10,12 +10,36 @@ var Jugador = {
   alto: 30,
   velocidad: 10,
   vidas: 5,
-  movimientoAnterior: '',
+  movimientoAnterior: 'abajo',
   // Hay que agregar lo que falte al jugador: movimientos, perdida de vidas,
   // y todo lo que haga falta para que cumpla con sus responsabilidades
   giro: function(sentido) {
+
     if (this.movimientoAnterior !== sentido) {
-      this.sprite = 'imagenes/auto_rojo_' + sentido + '.png';
+      switch (sentido) {
+        case 'arriba':
+            this.sprite = 'imagenes/auto_rojo_arriba.png';
+            this.ancho = 15;
+            this.alto = 30;
+          break;
+        case 'abajo':
+            this.sprite = 'imagenes/auto_rojo_abajo.png';
+            this.ancho = 15;
+            this.alto = 30;
+          break;
+        case 'der':
+            this.sprite = 'imagenes/auto_rojo_derecha.png';
+            this.ancho = 30;
+            this.alto = 15;
+          break;
+        case 'izq':
+            this.sprite = 'imagenes/auto_rojo_izquierda.png';
+            this.ancho = 30;
+            this.alto = 15;
+          break;
+        default:
+
+      }
       this.movimientoAnterior = sentido;
     };
   },

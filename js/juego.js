@@ -115,7 +115,6 @@ Juego.capturarMovimiento = function(tecla) {
   // El movimiento esta determinado por la velocidad del jugador
   if (tecla == 'izq') {
     movX = velocidad * -1;
-    tecla = 'izquierda';
   }
 
   if (tecla == 'arriba') {
@@ -124,7 +123,6 @@ Juego.capturarMovimiento = function(tecla) {
 
   if (tecla == 'der') {
     movX = velocidad;
-    tecla = 'derecha';
   }
 
   if (tecla == 'abajo') {
