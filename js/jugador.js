@@ -10,11 +10,20 @@ var Jugador = {
   alto: 30,
   velocidad: 10,
   vidas: 5,
+  movimientoAnterior: '',
   // Hay que agregar lo que falte al jugador: movimientos, perdida de vidas,
   // y todo lo que haga falta para que cumpla con sus responsabilidades
-  mover: function(nuevaX, nuevaY) {
-    this.x = nuevaX
-    this.y = nuevaY
+  giro: function(sentido) {
+    if (this.movimientoAnterior !== sentido) {
+      this.sprite = 'imagenes/auto_rojo_' + sentido + '.png';
+      this.movimientoAnterior = sentido;
+    };
   },
-  perdervidas: function() {},
+  mover: function(nuevaX, nuevaY) {
+    this.x += nuevaX;
+    this.y += nuevaY;
+  },
+  perderVidas: function(cantidad) {
+    this.vidas -= cantidad;
+  },
 }

@@ -114,14 +114,19 @@ Juego.capturarMovimiento = function(tecla) {
 
   // El movimiento esta determinado por la velocidad del jugador
   if (tecla == 'izq') {
-    movX = -velocidad;
+    movX = velocidad * -1;
+    tecla = 'izquierda';
   }
+
   if (tecla == 'arriba') {
-    movY = -velocidad;
+    movY = velocidad * -1;
   }
+
   if (tecla == 'der') {
     movX = velocidad;
+    tecla = 'derecha';
   }
+
   if (tecla == 'abajo') {
     movY = velocidad;
   }
@@ -130,8 +135,8 @@ Juego.capturarMovimiento = function(tecla) {
   if (this.chequearColisiones(movX + this.jugador.x, movY + this.jugador.y)) {
     /* Aca tiene que estar la logica para mover al jugador invocando alguno
     de sus metodos  */
-
-    /* COMPLETAR */
+    Jugador.giro(tecla);
+    Jugador.mover(movX, movY);
   }
 };
 
@@ -200,10 +205,9 @@ Juego.chequearColisiones = function(x, y) {
   var puedeMoverse = true
   this.obstaculos().forEach(function(obstaculo) {
     if (this.intersecan(obstaculo, this.jugador, x, y)) {
-
       /*COMPLETAR, obstaculo debe chocar al jugador*/
-
-      puedeMoverse = false
+      puedeMoverse = false;
+      obstaculo.chocar(this.jugador);
     }
   }, this)
   return puedeMoverse
