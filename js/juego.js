@@ -17,10 +17,36 @@ var Juego = {
   // Indica si el jugador gano
   ganador: false,
 
+  // CASU
+  //calleSendaLlegada: new Llegada('imagenes/calle_senda_llegada.png', 120, 120, 120, 30),
+
   obstaculosCarretera: [
     /*Aca se van a agregar los obstaculos visibles. Tenemos una valla horizontal
     de ejemplo, pero podras agregar muchos mas. */
-    new Obstaculo('imagenes/valla_horizontal.png', 70, 430, 30, 30, 1)
+    new Obstaculo('imagenes/valla_horizontal.png', 135, 105, 30, 30, 1),
+    new Obstaculo('imagenes/valla_horizontal.png', 165, 105, 30, 30, 1),
+
+    new Obstaculo('imagenes/auto_verde_abajo.png', 180, 254, 15, 30, 1),
+
+    new Obstaculo('imagenes/valla_horizontal.png', 70, 430, 30, 30, 1),
+    new Obstaculo('imagenes/valla_horizontal.png', 100, 430, 30, 30, 1),
+    new Obstaculo('imagenes/valla_horizontal.png', 130, 430, 30, 30, 1),
+    new Obstaculo('imagenes/valla_vertical.png', 190, 460, 30, 30, 1),
+
+    new Obstaculo('imagenes/auto_verde_derecha.png', 400, 424, 30, 15, 1),
+
+    new Obstaculo('imagenes/valla_vertical.png', 490, 460, 30, 30, 1),
+    new Obstaculo('imagenes/valla_vertical.png', 490, 430, 30, 30, 1),
+    new Obstaculo('imagenes/valla_horizontal.png', 520, 400, 30, 30, 1),
+
+    new Obstaculo('imagenes/bache.png', 340, 450, 30, 30, 1),
+    new Obstaculo('imagenes/bache.png', 150, 224, 30, 30, 1),
+    new Obstaculo('imagenes/bache.png', 600, 70, 30, 30, 1),
+    new Obstaculo('imagenes/bache.png', 824, 424, 30, 30, 1),
+
+
+    new Obstaculo('imagenes/auto_verde_abajo.png', 854, 400, 15, 30, 1),
+
 
   ],
   /* Estos son los bordes con los que se puede chocar, por ejemplo, la vereda.
@@ -72,7 +98,9 @@ Juego.iniciarRecursos = function() {
     'imagenes/auto_rojo_derecha.png',
     'imagenes/auto_rojo_izquierda.png',
     'imagenes/auto_verde_abajo.png',
-    'imagenes/auto_verde_derecha.png'
+    'imagenes/auto_verde_derecha.png',
+    // CASU
+    //'imagenes/calle_senda_llegada.png'
   ]);
   Resources.onReady(this.comenzar.bind(Juego));
 };
@@ -149,6 +177,8 @@ Juego.dibujar = function() {
   utilizando al dibujante y los metodos que nos brinda.
   "Dibujante dibuja al jugador" */
 Dibujante.dibujarEntidad(Jugador);
+// CASU
+//Dibujante.dibujarEntidad(calleSendaLlegada);
   /* Completar */
 
   // Se recorren los obstaculos de la carretera pintandolos
