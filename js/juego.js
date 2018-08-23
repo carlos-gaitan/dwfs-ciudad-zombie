@@ -70,6 +70,21 @@ var Juego = {
   ],
   // Los enemigos se agregaran en este arreglo.
   enemigos: [
+    new ZombieCaminante('imagenes/zombie2.png', 450, 250, 10, 10, 2, {desdeX: 400, hastaX: 500, desdeY: 200, hastaY: 250}),
+    new ZombieCaminante("imagenes/zombie1.png",20,200,10,10,1,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557}),
+    new ZombieCaminante("imagenes/zombie1.png",20,200,10,10,1,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557}),
+    new ZombieCaminante("imagenes/zombie2.png",80,80,10,10,1,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557}),
+    new ZombieCaminante("imagenes/zombie2.png",100,200,10,10,1,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557}),
+    new ZombieCaminante("imagenes/zombie3.png",850,500,10,10,1,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557}),
+    new ZombieCaminante("imagenes/zombie3.png",880,530,10,10,1,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557}),
+    new ZombieCaminante("imagenes/zombie4.png",350,80,10,10,1,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557}),
+    new ZombieCaminante("imagenes/tren_vertical.png", 644, 0, 30, 90, 5,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557}, 'v'),
+    new ZombieCaminante("imagenes/tren_vertical.png", 678, 0, 30, 90, 5,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557}, 'v'),
+    new ZombieCaminante("imagenes/tren_vertical.png", 400, 322, 90, 30, 5,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557}, 'h'),
+
+    //new ZombieCaminante('imagenes/zombie2', x, y, 10, 10, velocidad, rangoMov),
+    //new ZombieCaminante('imagenes/zombie3', x, y, 10, 10, velocidad, rangoMov),
+    //new ZombieCaminante('imagenes/zombie4', x, y, 10, 10, velocidad, rangoMov)
 
   ]
 
@@ -188,7 +203,7 @@ Dibujante.dibujarEntidad(Jugador);
 
   // Se recorren los enemigos pintandolos
   this.enemigos.forEach(function(enemigo) {
-    /* Completar */
+    Dibujante.dibujarEntidad(enemigo);
   });
 
   // El dibujante dibuja las vidas del jugador
@@ -206,6 +221,10 @@ Dibujante.dibujarEntidad(Jugador);
 un recorrido por los enemigos para dibujarlos en pantalla ahora habra que hacer
 una funcionalidad similar pero para que se muevan.*/
 Juego.moverEnemigos = function() {
+  this.enemigos.forEach(function(enemigo) {
+    //Dibujante.dibujarEntidad(enemigo);
+    enemigo.mover();
+  });
   /* COMPLETAR */
 };
 
