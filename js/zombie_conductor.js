@@ -4,13 +4,18 @@ Por ejemplo, la cantidad parametros que recibe su constructor. En ZombieConducto
 no son exactamente los mismos parametros que en el objeto Enemigo, a diferencia
 del ZombieCaminante que eran los mismos. */
 
-var ZombieConductor = function(sprite, x, y, ancho, alto, velocidad, rangoMov/*, parametro/s extra de ZombieConductor*/) {
+var ZombieConductor = function(sprite, x, y, ancho, alto, velocidad, rangoMov, ejeDeMovimiento) {
   /* Completar constructor a partir de Enemigo */
   //Enemigo.call(/* ... */);
+  Enemigo.call(this, sprite, x, y, ancho, alto, velocidad, rangoMov);
+  this.ejeDeMovimiento = ejeDeMovimiento;
   /* No olvidar agregar la/s propiedad/es unicas de ZombieConductor necesarias */
 }
 
-ZombieConductor.prototype.mover = function() {
+ZombieConductor.prototype = Object.create(Enemigo,prototype);
+ZombieConductor.prototype.constructor = ZombieConductor;
+
+ZombieConductor.prototype.mover = function(/* le paso el eje por parametro o con this?*/) {
   /* Los movimientos estan basados en un numero aleatorio
   La direccion horizontal es siempre la misma y va ondulando verticalmente.
   Esto hasta llegar a sus limites, donde se invierte su direccion horizontal */
