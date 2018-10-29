@@ -13,10 +13,9 @@ var Jugador = {
   movimientoAnterior: 'abajo',
   // Hay que agregar lo que falte al jugador: movimientos, perdida de vidas,
   // y todo lo que haga falta para que cumpla con sus responsabilidades
-  giro: function(sentido) {
-
-    if (this.movimientoAnterior !== sentido) {
-      switch (sentido) {
+  giro: function(movimientoNuevo) {
+    if (this.movimientoAnterior !== movimientoNuevo) {
+      switch (movimientoNuevo) {
         case 'arriba':
             this.sprite = 'imagenes/auto_rojo_arriba.png';
             this.ancho = 15;
@@ -40,7 +39,7 @@ var Jugador = {
         default:
 
       }
-      this.movimientoAnterior = sentido;
+      this.movimientoAnterior = movimientoNuevo;
     };
   },
   mover: function(nuevaX, nuevaY) {
