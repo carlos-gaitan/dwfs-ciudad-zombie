@@ -49,4 +49,7 @@ var Jugador = {
   perderVidas: function(cantidad) {
     this.vidas -= cantidad;
   },
+  recargarVidas: function() {
+    this.vidas = 5;
+  }
 }

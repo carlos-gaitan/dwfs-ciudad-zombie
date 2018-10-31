@@ -17,3 +17,12 @@ canvas {
   font-family: monospace;
   visibility: hidden;
 }
+.comandos {
+  justify-content: center;
+  margin: auto;
+  background: none;
+  border: none;
+  color: green;
+  font-family: monospace;
+  visibility: hidden;
+}

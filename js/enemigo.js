@@ -27,6 +27,7 @@ var Enemigo = function (sprite, x, y, ancho, alto, velocidad, rangoMov) {
 /* Por defecto, un enemigo sabe responder al mensaje de atacar
 sacando una vida al jugador.*/
 Enemigo.prototype.atacar = function (jugador) {
+  console.log('sangre!!!!  x:'+ this.x +' y:' + this.y);
   Dibujante.dibujarImagen('imagenes/sangre.png', jugador.x, jugador.y, 30, 30);
   jugador.perderVidas(1);
 }

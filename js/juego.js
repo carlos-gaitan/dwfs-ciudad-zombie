@@ -14,27 +14,25 @@ var Juego = {
   altoCanvas: 577,
   jugador: Jugador,
   vidasInicial: Jugador.vidas,
-  // Indica si el jugador gano
-  ganador: false,
-
+  ganador: false, // Indica si el jugador gano
+  audio: new Audio('audio/Rob Zombie - Dragula.mp3'),
   obstaculosCarretera: [
-    /*Aca se van a agregar los obstaculos visibles. Tenemos una valla horizontal
-    de ejemplo, pero podras agregar muchos mas. */
+    // Valla horizontal
     new Obstaculo('imagenes/valla_horizontal.png', 135, 105, 30, 30, 1),
     new Obstaculo('imagenes/valla_horizontal.png', 165, 105, 30, 30, 1),
     new Obstaculo('imagenes/valla_horizontal.png', 70, 430, 30, 30, 1),
     new Obstaculo('imagenes/valla_horizontal.png', 100, 430, 30, 30, 1),
     new Obstaculo('imagenes/valla_horizontal.png', 130, 430, 30, 30, 1),
     new Obstaculo('imagenes/valla_horizontal.png', 520, 400, 30, 30, 1),
-
+    // Valla vertical
     new Obstaculo('imagenes/valla_vertical.png', 190, 460, 30, 30, 1),
     new Obstaculo('imagenes/valla_vertical.png', 490, 460, 30, 30, 1),
     new Obstaculo('imagenes/valla_vertical.png', 490, 430, 30, 30, 1),
-
+    // Auto verde
     new Obstaculo('imagenes/auto_verde_abajo.png', 180, 254, 15, 30, 1),
     new Obstaculo('imagenes/auto_verde_derecha.png', 400, 424, 30, 15, 1),
     new Obstaculo('imagenes/auto_verde_abajo.png', 854, 400, 15, 30, 1),
-
+    // Bache
     new Obstaculo('imagenes/bache.png', 340, 450, 30, 30, 1),
     new Obstaculo('imagenes/bache.png', 150, 224, 30, 30, 1),
     new Obstaculo('imagenes/bache.png', 600, 70, 30, 30, 1),
@@ -45,7 +43,7 @@ var Juego = {
    Ya estan ubicados en sus lugares correspondientes. Ya aparecen en el mapa, ya
    que son invisibles. No tenes que preocuparte por ellos.*/
   bordes: [
-    // // Bordes
+    // Bordes
     new Obstaculo('', 0, 5, 961, 18, 0),
     new Obstaculo('', 0, 559, 961, 18, 0),
     new Obstaculo('', 0, 5, 18, 572, 0),
@@ -61,21 +59,26 @@ var Juego = {
     new Obstaculo('', 887, 79, 56, 480, 2)
   ],
 
-  // Los enemigos se agregaran en este arreglo.
   enemigos: [
+    // ZombieCaminante
+    new ZombieCaminante("imagenes/zombie1.png",20,200,10,10,1,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557}),
+    //new ZombieCaminante("imagenes/zombie1.png",20,200,10,10,1,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557}),
     new ZombieCaminante('imagenes/zombie2.png', 450, 250, 10, 10, 2, {desdeX: 400, hastaX: 500, desdeY: 200, hastaY: 250}),
-    new ZombieCaminante("imagenes/zombie1.png",20,200,10,10,1,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557}),
-    new ZombieCaminante("imagenes/zombie1.png",20,200,10,10,1,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557}),
-    new ZombieCaminante("imagenes/zombie2.png",80,80,10,10,1,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557}),
-    new ZombieCaminante("imagenes/zombie2.png",100,200,10,10,1,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557}),
+    // new ZombieCaminante("imagenes/zombie2.png",80,80,10,10,1,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557}),
+    // new ZombieCaminante("imagenes/zombie2.png",100,200,10,10,1,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557}),
     new ZombieCaminante("imagenes/zombie3.png",850,500,10,10,1,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557}),
-    new ZombieCaminante("imagenes/zombie3.png",880,530,10,10,1,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557}),
+    // new ZombieCaminante("imagenes/zombie3.png",880,530,10,10,1,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557}),
     new ZombieCaminante("imagenes/zombie4.png",350,80,10,10,1,{desdeX: 20, hastaX: 941, desdeY: 20, hastaY: 557}),
+    // Tren
     new ZombieConductor("imagenes/tren_vertical.png", 644, 0, 30, 90, 5,{desdeX: 644, hastaX: 644, desdeY: 0, hastaY: 557}, 'v'),
     new ZombieConductor("imagenes/tren_vertical.png", 678, 0, 30, 90, 5,{desdeX: 20, hastaX: 961, desdeY: 20, hastaY: 557}, 'v'),
     new ZombieConductor("imagenes/tren_horizontal.png", 400, 322, 90, 30, 5,{desdeX: 20, hastaX: 911, desdeY: 20, hastaY: 557}, 'h')
-  ]
+  ],
+  // FUNCIONALIDAD ADICIONAL Cada vez que el zombie es atacado o choca algun obstaculo o limite queda una macha
+  // de sangre pintada en el lugar.
+  sangre:[]
 }
+
 
 /* Se cargan los recursos de las imagenes, para tener un facil acceso
 a ellos. No hace falta comprender esta parte. Pero si queres agregar tus propies
@@ -84,8 +87,11 @@ todas las demas. */
 Juego.iniciarRecursos = function() {
   Resources.load([
     'imagenes/mapa.png',
-    'imagenes/mensaje_gameover.png',
+    'imagenes/Mensaje1.png',
+    'imagenes/Mensaje2.png',
+    'imagenes/Mensaje3.png',
     'imagenes/Splash.png',
+    'imagenes/mensaje_gameover.png',
     'imagenes/bache.png',
     'imagenes/tren_horizontal.png',
     'imagenes/tren_vertical.png',
@@ -115,10 +121,30 @@ Juego.obstaculos = function() {
 Juego.comenzar = function() {
   // Inicializar el canvas del juego
   Dibujante.inicializarCanvas(this.anchoCanvas, this.altoCanvas);
-  /* El bucle principal del juego se llamara continuamente para actualizar
-  los movimientos y el pintado de la pantalla. Sera el encargado de calcular los
-  ataques, colisiones, etc*/
-  this.buclePrincipal();
+  // Reproduccion del sonido se decide que elija reproducirlo el usuario.
+  //Juego.reproductor();
+  // Muestro Mensaje instructivo #1
+  Dibujante.dibujarImagen('imagenes/Mensaje1.png', 0, 5, 961, 577);
+  // Espero y vuelvo a mostrar Mensaje instructivo #2
+  setTimeout(function() {
+    Dibujante.borrarAreaDeJuego();
+    Dibujante.dibujarImagen('imagenes/Mensaje2.png', 0, 5, 961, 577);
+  }, 3000);
+  // Espero unos segundos mas dando tiempo a leer el segundo mensaje y cargo el bucle principal.
+  setTimeout(function() {
+    // Juego.comenzar();
+    /* El bucle principal del juego se llamara continuamente para actualizar
+    los movimientos y el pintado de la pantalla. Sera el encargado de calcular los
+    ataques, colisiones, etc*/
+    Juego.buclePrincipal();
+    // Muestro botones de funciones del juego
+    document.getElementById('recargar-vidas').style.visibility = 'visible';
+    document.getElementById('reiniciar-juego').style.visibility = 'visible';
+  }, 5500);
+  // Muestro botones de funciones del juego
+  document.getElementById('reproducir-musica').style.visibility = 'visible';
+
+
 };
 
 Juego.buclePrincipal = function() {
@@ -169,6 +195,11 @@ Juego.dibujar = function() {
   Dibujante.borrarAreaDeJuego();
   //Se pinta la imagen de fondo segun el estado del juego
   this.dibujarFondo();
+  /*Aca verifico todo el tiempo antes de dibujar si el jugador ha ganado o
+   ha perdido, si esto es positivo inmediatamente dejo de dibujar las entidades.*/
+  if(this.terminoJuego() || this.ganoJuego()) {
+    return;
+  };
 
   /* Aca hay que agregar la logica para poder dibujar al jugador principal
   utilizando al dibujante y los metodos que nos brinda.
@@ -187,9 +218,12 @@ Juego.dibujar = function() {
     Dibujante.dibujarEntidad(enemigo);
   });
 
+  // El dibujante dibuja la sangre que perdio el jugador sangre
+  this.sangre.forEach(function(sangreMancha) {
+    Dibujante.dibujarEntidad(sangreMancha);
+  });
+
   // El dibujante dibuja las vidas del jugador
-
-
   var tamanio = this.anchoCanvas / this.vidasInicial;
   Dibujante.dibujarRectangulo('white', 0, 0, this.anchoCanvas, 8);
   for (var i = 0; i < this.jugador.vidas; i++) {
@@ -202,17 +236,26 @@ Juego.dibujar = function() {
 
 };
 
+  //Agrega al arreglo sangre una instancia donde se ha perdido una vida
+  Juego.dibujarSangre = function(x, y) {
+    this.sangre.push (new Sangre('imagenes/sangre.png', x, y, 30, 30));
+};
 
+  Juego.reproductor = function() {
+    return Juego.audio.paused ? Juego.audio.play() : Juego.audio.pause();
+  };
+
+  Juego.recargarVidas = function() {
+    Jugador.recargarVidas();
+  };
 
 /* Recorre los enemigos haciendo que se muevan. De la misma forma que hicimos
 un recorrido por los enemigos para dibujarlos en pantalla ahora habra que hacer
 una funcionalidad similar pero para que se muevan.*/
 Juego.moverEnemigos = function() {
   this.enemigos.forEach(function(enemigo) {
-    //Dibujante.dibujarEntidad(enemigo);
     enemigo.mover();
   });
-  /* COMPLETAR */
 };
 
 /* Recorre los enemigos para ver cual esta colisionando con el jugador
@@ -222,21 +265,18 @@ se ven las colisiones con los obstaculos. En este caso sera con los zombies. */
 Juego.calcularAtaques = function() {
   this.enemigos.forEach(function(enemigo) {
     if (this.intersecan(enemigo, this.jugador, this.jugador.x, this.jugador.y)) {
-      /* Si el enemigo colisiona debe empezar su ataque
-      COMPLETAR */
-      //Dibujante.dibujarImagen('imagenes/sangre.png', this.jugador.x, this.jugador.y, 30, 30);
+      /* Si el enemigo colisiona debe empezar su ataque */
       enemigo.comenzarAtaque(this.jugador);
+      /* Si eljugador es atacado o coliciona con algun obstaculo o limite
+      llama al metodo dibujar sangre */
+      Juego.dibujarSangre(this.jugador.x, this.jugador.y);
 
     } else {
-      /* Sino, debe dejar de atacar
-      COMPLETAR */
+      /* Sino, debe dejar de atacar */
       enemigo.dejarDeAtacar(this.jugador);
-
     }
   }, this);
 };
-
-
 
 /* Aca se chequea si el jugador se peude mover a la posicion destino.
  Es decir, que no haya obstaculos que se interpongan. De ser asi, no podra moverse */
@@ -244,17 +284,17 @@ Juego.chequearColisiones = function(x, y) {
   var puedeMoverse = true
   this.obstaculos().forEach(function(obstaculo) {
     if (this.intersecan(obstaculo, this.jugador, x, y)) {
-      /*COMPLETAR, obstaculo debe chocar al jugador*/
+      /* El obstaculo debe chocar al jugador */
       puedeMoverse = false;
-      //Dibujante.dibujarImagen('imagenes/sangre.png', this.jugador.x, this.jugador.y, 30, 30);
       obstaculo.chocar(this.jugador);
+      Juego.dibujarSangre(this.jugador.x, this.jugador.y);
     }
   }, this)
   return puedeMoverse
 };
 
 /* Este metodo chequea si los elementos 1 y 2 si cruzan en x e y
- x e y representan la coordenada a la cual se quiere mover el elemento2*/
+ x e y representan la coordenada a la cual se quiere mover el elemento2 */
 Juego.intersecan = function(elemento1, elemento2, x, y) {
   var izquierda1 = elemento1.x
   var derecha1 = izquierda1 + elemento1.ancho
@@ -272,14 +312,22 @@ Juego.intersecan = function(elemento1, elemento2, x, y) {
 Juego.dibujarFondo = function() {
   // Si se termino el juego hay que mostrar el mensaje de game over de fondo
   if (this.terminoJuego()) {
+    Dibujante.borrarAreaDeJuego();
     Dibujante.dibujarImagen('imagenes/mensaje_gameover.png', 0, 5, this.anchoCanvas, this.altoCanvas);
     document.getElementById('reiniciar').style.visibility = 'visible';
+    //document.getElementById('reproducir-musica').style.visibility = 'hidden';
+    document.getElementById('recargar-vidas').style.visibility = 'hidden';
+    document.getElementById('reiniciar-juego').style.visibility = 'hidden';
   }
 
   // Si se gano el juego hay que mostrar el mensaje de ganoJuego de fondo
   else if (this.ganoJuego()) {
-    Dibujante.dibujarImagen('imagenes/Splash.png', 190, 113, 500, 203);
+    //Dibujante.dibujarImagen('imagenes/Splash.png', 190, 113, 500, 203);
+    Dibujante.dibujarImagen('imagenes/Mensaje3.png', 0, 5, 961, 577);
     document.getElementById('reiniciar').style.visibility = 'visible';
+    //document.getElementById('reproducir-musica').style.visibility = 'hidden';
+    document.getElementById('recargar-vidas').style.visibility = 'hidden';
+    document.getElementById('reiniciar-juego').style.visibility = 'hidden';
   } else {
     Dibujante.dibujarImagen('imagenes/mapa.png', 0, 5, this.anchoCanvas, this.altoCanvas);
   }
